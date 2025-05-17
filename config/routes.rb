@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Memes routes
-  get '/memes', to: 'memes#show'
+  get "/memes", to: "memes#show"
 
   # Defines the root path route ("/")
   root "home#index"
