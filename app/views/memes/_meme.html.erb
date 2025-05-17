@@ -1,0 +1,28 @@
+<% if meme && meme[:error].present? %>
+  <div class="error-message">
+    <%= meme[:error] %>
+  </div>
+<% else %>
+  <div class="meme-content" data-meme-target="container">
+    <h2 class="meme-title" data-meme-target="title">
+      <!-- Empty title, will be filled by controller -->
+    </h2>
+    
+    <div class="meme-image-container">
+      <div class="spinner" data-meme-target="spinner"></div>
+      <img 
+        src="" 
+        alt="Meme image" 
+        class="meme-image" 
+        data-meme-target="image"
+        style="opacity: 0;"
+      >
+    </div>
+    
+    <div class="meme-metadata" data-meme-target="metadata">
+      <!-- Empty metadata, will be filled by controller -->
+    </div>
+    
+    <div class="error-message" style="display: none;" data-meme-target="error"></div>
+  </div>
+<% end %> 

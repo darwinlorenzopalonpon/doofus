@@ -1,0 +1,48 @@
+body {
+  background-color: black;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+
+.homepage-container {
+  text-align: center;
+}
+
+.logo {
+  font-size: 6rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.doof {
+  color: white;
+}
+
+.us {
+  color: red;
+}
+
+.links-container {
+  margin-top: 2rem;
+}
+
+.link-button {
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+  padding: 0.5rem 1.5rem;
+  border: 2px solid white;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.link-button:hover {
+  background-color: white;
+  color: black;
+} 

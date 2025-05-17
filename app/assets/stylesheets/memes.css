@@ -1,0 +1,140 @@
+/* Meme page styles */
+.meme-page {
+  background-color: black;
+  min-height: 100vh;
+  color: white;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: white;
+}
+
+.meme-container {
+  max-width: 800px;
+  width: 100%;
+  background-color: #111;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.meme-content {
+  margin-bottom: 2rem;
+  min-height: 400px; /* Prevent layout shifts */
+  display: flex;
+  flex-direction: column;
+}
+
+.meme-title {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  word-wrap: break-word;
+  transition: opacity 0.3s ease;
+  min-height: 2.5rem; /* Prevent layout shifts */
+}
+
+.meme-image-container {
+  position: relative;
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.meme-image {
+  max-width: 100%;
+  max-height: 600px;
+  border-radius: 4px;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+}
+
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 4px solid white;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  position: absolute;
+  z-index: 5;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.meme-metadata {
+  color: #888;
+  font-size: 0.9rem;
+  margin-top: auto; /* Push to bottom of flex container */
+  transition: opacity 0.3s ease;
+  min-height: 1.5rem; /* Prevent layout shifts */
+}
+
+.loading-indicator {
+  color: white;
+  font-size: 1.2rem;
+  padding: 3rem;
+  text-align: center;
+}
+
+.error-message {
+  color: #ff6b6b;
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.meme-controls {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.meme-button {
+  background-color: #333;
+  color: white;
+  border: 2px solid white;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.meme-button:hover {
+  background-color: white;
+  color: black;
+}
+
+.back-link {
+  color: #999;
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #444;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.back-link:hover {
+  color: white;
+  border-color: white;
+}
+
+/* Prevent flash of content during transitions */
+.turbo-progress-bar {
+  background-color: white !important;
+} 

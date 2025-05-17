@@ -1,0 +1,18 @@
+<% content_for :head do %>
+  <meta name="turbo-cache-control" content="no-cache">
+<% end %>
+
+<div class="meme-page">
+  <h1 class="page-title">MEMES</h1>
+  
+  <div class="meme-container" data-controller="meme">
+    <div id="meme_frame">
+      <%= render partial: "memes/meme", locals: { meme: nil } %>
+    </div>
+    
+    <div class="meme-controls">
+      <button class="meme-button" data-action="click->meme#fetchMeme">Get Another Meme</button>
+      <%= link_to "Back to Home", root_path, class: "back-link", data: { turbo: false } %>
+    </div>
+  </div>
+</div> 
