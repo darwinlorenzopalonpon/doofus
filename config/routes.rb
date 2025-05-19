@@ -12,6 +12,12 @@ Rails.application.routes.draw do
   # Memes routes
   get "/memes", to: "memes#show"
 
+  # Meals routes
+  get "/meals", to: "meals#index"
+  get "/meals/new", to: "meals#new"
+  post "/meals/create", to: "meals#create"
+  get "/meals/result", to: "meals#result"
+
   # Defines the root path route ("/")
   root "home#index"
 end
