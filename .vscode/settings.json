@@ -1,0 +1,36 @@
+{
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": true,
+  "editor.renderWhitespace": "boundary",
+  // Default formatting options
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  // Format on save
+  "editor.formatOnSave": true,
+  // Language specific settings
+  "[ruby]": {
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true
+  },
+  "[javascript]": {
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true
+  },
+  "[css]": {
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true
+  },
+  "[html]": {
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true
+  },
+  "[erb]": {
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true
+  },
+  // Don't trim trailing whitespace in Markdown as it can be meaningful
+  "[markdown]": {
+    "files.trimTrailingWhitespace": false
+  }
+}
