@@ -1,9 +1,9 @@
 module ApplicationHelper
-  require 'redcarpet'
-  
+  require "redcarpet"
+
   def markdown(text)
     return "" if text.blank?
-    
+
     renderer = Redcarpet::Render::HTML.new(hard_wrap: true, filter_html: true)
     options = {
       autolink: true,
@@ -14,7 +14,7 @@ module ApplicationHelper
       superscript: true,
       tables: true
     }
-    
+
     markdown = Redcarpet::Markdown.new(renderer, options)
     markdown.render(text).html_safe
   rescue StandardError => e

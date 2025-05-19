@@ -1,12 +1,12 @@
 class RecipeGeneratorService
-  require 'net/http'
-  require 'uri'
-  require 'json'
+  require "net/http"
+  require "uri"
+  require "json"
 
   # OpenAI API settings
-  OPENAI_API_KEY = ENV['OPENAI_API_KEY']
-  OPENAI_API_ENDPOINT = 'https://api.openai.com/v1/chat/completions'
-  OPENAI_MODEL = ENV['OPENAI_MODEL'] || 'gpt-4.1-nano'
+  OPENAI_API_KEY = ENV["OPENAI_API_KEY"]
+  OPENAI_API_ENDPOINT = "https://api.openai.com/v1/chat/completions"
+  OPENAI_MODEL = ENV["OPENAI_MODEL"] || "gpt-4.1-nano"
 
   def self.generate_recipe(params)
     new.generate_recipe(params)
@@ -88,15 +88,15 @@ class RecipeGeneratorService
     # Create the request
     uri = URI.parse(OPENAI_API_ENDPOINT)
     request = Net::HTTP::Post.new(uri)
-    request['Content-Type'] = 'application/json'
-    request['Authorization'] = "Bearer #{OPENAI_API_KEY}"
+    request["Content-Type"] = "application/json"
+    request["Authorization"] = "Bearer #{OPENAI_API_KEY}"
 
     # Build the request body
     request.body = {
       model: OPENAI_MODEL,
       messages: [
-        { role: 'system', content: 'You are a professional chef who specializes in precise recipe development.' },
-        { role: 'user', content: prompt }
+        { role: "system", content: "You are a professional chef who specializes in precise recipe development." },
+        { role: "user", content: prompt }
       ],
       temperature: 0.7,
       max_tokens: 2000
@@ -110,7 +110,7 @@ class RecipeGeneratorService
     # Process the response
     if response.code.to_i == 200
       result = JSON.parse(response.body)
-      result['choices'][0]['message']['content']
+      result["choices"][0]["message"]["content"]
     else
       raise "API request failed with status #{response.code}: #{response.body}"
     end
