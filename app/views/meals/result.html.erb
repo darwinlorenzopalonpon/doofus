@@ -1,0 +1,60 @@
+<% content_for :head do %>
+  <meta name="turbo-cache-control" content="no-cache">
+<% end %>
+
+<div id="top" class="meal-prep-container">
+  <h1 class="page-title">Your Recipe</h1>
+
+  <div class="recipe-container">
+    <div class="recipe-header">
+      <div class="recipe-basics">
+        <p>Meal type: <strong><%= @meal_data[:meal_type] %></strong></p>
+        <p>Servings: <strong><%= @meal_data[:servings] %></strong></p>
+        <p>Time available: <strong><%= @meal_data[:time_available] %></strong></p>
+      </div>
+
+      <div class="recipe-inputs">
+        <div class="input-group">
+          <h4>Must-use ingredients:</h4>
+          <p><%= @meal_data[:must_use_ingredients] %></p>
+        </div>
+
+        <% if @meal_data[:available_ingredients].present? %>
+          <div class="input-group">
+            <h4>Other available ingredients:</h4>
+            <p><%= @meal_data[:available_ingredients] %></p>
+          </div>
+        <% end %>
+
+        <div class="input-group">
+          <h4>Cooking equipment:</h4>
+          <p><%= @meal_data[:cooking_equipment].join(", ") %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="recipe-content">
+      <% if @recipe.present? && !@recipe.start_with?("Sorry") %>
+        <div class="generated-recipe" style="height: auto !important; max-height: none !important; overflow: visible !important;">
+          <%= markdown(@recipe) %>
+        </div>
+      <% elsif @recipe.present? %>
+        <div class="error-message">
+          <%= @recipe %>
+        </div>
+      <% else %>
+        <!-- Display loading state -->
+        <div class="loading-placeholder">
+          <div class="loading-spinner"></div>
+          <p>Generating your recipe...</p>
+          <p class="loading-hint">This may take up to 30 seconds...</p>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="recipe-actions">
+      <%= link_to "New Recipe", meals_new_path, class: "btn btn-outline-primary", data: { turbo: false } %>
+      <%= link_to "Back to Home", root_path, class: "btn btn-link", data: { turbo: false } %>
+    </div>
+  </div>
+</div>

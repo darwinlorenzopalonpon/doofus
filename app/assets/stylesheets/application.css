@@ -8,3 +8,13 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+/* Global reset and theme */
+body {
+  background-color: black;
+  color: white;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}

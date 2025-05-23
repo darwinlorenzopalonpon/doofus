@@ -1,0 +1,84 @@
+<div id="top" class="meal-prep-container" data-controller="meal">
+  <h1 class="page-title">Meal Preparation Assistant</h1>
+
+  <div class="form-container" data-meal-target="content">
+    <%= form_with url: meals_create_path, method: :post, class: "meal-form", data: { turbo: false, meal_target: "form", action: "submit->meal#submitForm" } do |form| %>
+      <div class="form-section">
+        <h2>Meal Basics</h2>
+
+        <div class="form-group">
+          <%= form.label :meal_type, "What type of meal do you want to prepare?" %>
+          <%= form.select :meal_type,
+            [
+              ["Breakfast", "breakfast"],
+              ["Lunch", "lunch"],
+              ["Dinner", "dinner"],
+              ["Dessert", "dessert"],
+              ["Snack", "snack"]
+            ],
+            { include_blank: "Select meal type" },
+            { class: "form-control", required: true }
+          %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :servings, "How many servings?" %>
+          <%= form.select :servings,
+            (1..10).map { |n| [n.to_s, n.to_s] },
+            { include_blank: "Select number of servings" },
+            { class: "form-control", required: true }
+          %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :time_available, "How much time do you have?" %>
+          <%= form.select :time_available,
+            [
+              ["15 minutes or less", "15 minutes or less"],
+              ["30 minutes", "30 minutes"],
+              ["45 minutes", "45 minutes"],
+              ["60+ minutes", "60+ minutes"]
+            ],
+            { include_blank: "Select time available" },
+            { class: "form-control", required: true }
+          %>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h2>Ingredients & Equipment</h2>
+
+        <div class="form-group">
+          <%= form.label :must_use_ingredients, "Ingredients you must use (comma separated)" %>
+          <%= form.text_area :must_use_ingredients, class: "form-control", rows: 2, placeholder: "e.g. chicken, spinach", required: true %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :available_ingredients, "What other ingredients do you have? (comma separated)" %>
+          <%= form.text_area :available_ingredients, class: "form-control", rows: 3, placeholder: "e.g. eggs, milk, flour, butter" %>
+          <small class="form-text text-muted">Leave empty if none</small>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :cooking_equipment, "Available cooking equipment" %>
+          <div class="equipment-options">
+            <% ["Stovetop", "Oven", "Microwave", "Blender", "Food processor", "Pressure cooker", "Air fryer", "Toaster"].each do |equipment| %>
+              <div class="equipment-option">
+                <%= form.check_box :cooking_equipment, { multiple: true }, equipment, nil %>
+                <%= form.label :cooking_equipment, equipment, value: equipment %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <div class="submit-container">
+          <%= form.submit "Generate Recipe", class: "btn btn-primary", data: { meal_target: "submitButton" } %>
+          <div class="loading-spinner" data-meal-target="loadingSpinner" style="display: none;"></div>
+        </div>
+        <%= link_to "Back to Home", root_path, class: "btn btn-outline-secondary", data: { turbo: false } %>
+      </div>
+    <% end %>
+  </div>
+</div>
