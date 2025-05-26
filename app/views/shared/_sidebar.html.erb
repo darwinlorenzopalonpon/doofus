@@ -1,0 +1,44 @@
+<div data-controller="sidebar">
+  <button data-action="click->sidebar#toggle" class="menu-toggle" aria-label="Open menu">
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+  </button>
+
+  <div data-sidebar-target="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <h3>Doof.us</h3>
+      <button data-action="click->sidebar#close" class="sidebar-toggle" aria-label="Close sidebar">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+
+    <div class="sidebar-content">
+      <nav class="sidebar-nav">
+        <%= link_to "Home", root_path, class: "nav-link", data: { action: "click->sidebar#navigateAndClose" } %>
+        <%= link_to "Meals", meals_path, class: "nav-link", data: { action: "click->sidebar#navigateAndClose" } %>
+        <%= link_to "Memes", memes_path, class: "nav-link", data: { action: "click->sidebar#navigateAndClose" } %>
+      </nav>
+
+      <div class="sidebar-auth">
+        <% if authenticated? %>
+          <div class="user-info">
+            <p class="welcome-text">Welcome, <%= Current.user.email_address %>!</p>
+          </div>
+          <div class="auth-actions">
+            <%= button_to "Sign out", session_path, method: :delete, class: "btn btn-logout" %>
+          </div>
+        <% else %>
+          <div class="auth-actions">
+            <%= link_to "Sign in", new_session_path, class: "btn btn-login" %>
+            <%= link_to "Forgot password?", new_password_path, class: "link-secondary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div data-sidebar-target="overlay" data-action="click->sidebar#closeOnOverlay" class="sidebar-overlay"></div>
+</div>

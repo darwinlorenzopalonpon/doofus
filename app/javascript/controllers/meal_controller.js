@@ -3,18 +3,8 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["form", "submitButton", "loadingSpinner", "content"]
 
-  connect() {
-    console.log("Meal controller connected!")
-  }
-
   submitForm(event) {
-    console.log("Form submission intercepted")
-
-    // Show loading state
     this.showLoadingState(true)
-
-    // Let the form submit naturally
-    // The controller doesn't prevent the default behavior
   }
 
   showLoadingState(isLoading) {
