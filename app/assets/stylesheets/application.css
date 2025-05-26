@@ -9,6 +9,8 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
+@import "sidebar.css";
+
 /* Global reset and theme */
 body {
   background-color: black;
@@ -17,4 +19,12 @@ body {
   padding: 0;
   min-height: 100vh;
   font-family: Arial, sans-serif;
+}
+
+/* Main content styles */
+.main-content {
+  padding: 20px;
+  padding-top: 80px;
+  /* Space for the menu toggle button */
+  min-height: 100vh;
 }
