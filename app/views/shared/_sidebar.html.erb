@@ -25,7 +25,7 @@
       <div class="sidebar-auth">
         <% if authenticated? %>
           <div class="user-info">
-            <p class="welcome-text">Welcome, <%= Current.user.email_address %>!</p>
+            <p class="welcome-text">Welcome, <%= Current.user.email %>!</p>
           </div>
           <div class="auth-actions">
             <%= button_to "Sign out", session_path, method: :delete, class: "btn btn-logout" %>
