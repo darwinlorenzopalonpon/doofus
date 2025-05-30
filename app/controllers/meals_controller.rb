@@ -16,14 +16,16 @@ class MealsController < ApplicationController
       cooking_equipment: params[:cooking_equipment] || []
     }
 
-    @recipe = RecipeGeneratorService.generate_recipe(@meal_data)
+    # Always generate multiple recipes (3 variations)
+    @recipe_data = RecipeGeneratorService.generate_multiple_recipes(@meal_data)
+    @multiple_recipes = true
 
     render :result
   end
 
   def result
-    unless @recipe.present?
-      redirect_to meals_new_path, alert: "Please enter meal details to generate a recipe"
+    unless @recipe_data.present?
+      redirect_to meals_new_path, alert: "Please enter meal details to generate recipes"
     end
   end
 end

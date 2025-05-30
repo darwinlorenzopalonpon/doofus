@@ -3,7 +3,7 @@
 <% end %>
 
 <div id="top" class="meal-prep-container">
-  <h1 class="page-title">Your Recipe</h1>
+  <h1 class="page-title">Your Recipe Options</h1>
 
   <div class="recipe-container">
     <div class="recipe-header">
@@ -34,20 +34,114 @@
     </div>
 
     <div class="recipe-content">
-      <% if @recipe.present? && !@recipe.start_with?("Sorry") %>
-        <div class="generated-recipe" style="height: auto !important; max-height: none !important; overflow: visible !important;">
-          <%= markdown(@recipe) %>
-        </div>
-      <% elsif @recipe.present? %>
-        <div class="error-message">
-          <%= @recipe %>
-        </div>
+      <% if @recipe_data&.dig(:recipes)&.any? %>
+        <% recipes = @recipe_data[:recipes] %>
+        <% variations = @recipe_data[:variations] || [] %>
+
+        <% if @recipe_data[:fallback] %>
+          <div class="alert alert-warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            We had some issues generating multiple recipes, so here's one great option for you:
+          </div>
+          <!-- Single recipe from fallback -->
+          <div class="generated-recipe" style="height: auto !important; max-height: none !important; overflow: visible !important;">
+            <% if recipes.first.present? && !recipes.first.start_with?("Sorry") %>
+              <%= markdown(recipes.first) %>
+            <% else %>
+              <div class="error-message">
+                <%= recipes.first %>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="text-muted mb-3">
+            We've generated 3 different recipe approaches for you to compare: Traditional, Quick, and Creative.
+          </p>
+
+          <!-- Tabbed Interface for Multiple Recipes -->
+          <div data-controller="recipe-tabs">
+            <div class="recipe-tabs" role="tablist">
+              <% recipes.each_with_index do |recipe, index| %>
+                <button class="nav-link"
+                        data-recipe-tabs-target="tab"
+                        data-action="click->recipe-tabs#switchTab"
+                        data-index="<%= index %>"
+                        type="button"
+                        role="tab">
+                  Recipe <%= index + 1 %>
+                  <% if variations[index] %>
+                    <span class="variation-badge variation-<%= variations[index] %>">
+                      <%= variations[index].titleize %>
+                    </span>
+                  <% end %>
+                </button>
+              <% end %>
+              <button class="nav-link"
+                      data-recipe-tabs-target="tab"
+                      data-action="click->recipe-tabs#switchTab"
+                      data-index="<%= recipes.length %>"
+                      type="button"
+                      role="tab">
+                Compare All
+              </button>
+            </div>
+
+            <div class="tab-content">
+              <% recipes.each_with_index do |recipe, index| %>
+                <div class="tab-pane"
+                     data-recipe-tabs-target="content"
+                     role="tabpanel">
+                  <div class="generated-recipe" style="height: auto !important; max-height: none !important; overflow: visible !important;">
+                    <% if recipe.present? && !recipe.start_with?("Sorry") %>
+                      <%= markdown(recipe) %>
+                    <% else %>
+                      <div class="error-message">
+                        <%= recipe %>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+
+              <!-- Compare All Tab -->
+              <div class="tab-pane" data-recipe-tabs-target="content" role="tabpanel">
+                <div class="recipe-comparison">
+                  <h3>Compare All Recipes</h3>
+                  <div class="recipe-comparison-grid">
+                    <% recipes.each_with_index do |recipe, index| %>
+                      <div class="recipe-comparison-item">
+                        <h4>
+                          Recipe <%= index + 1 %>
+                          <% if variations[index] %>
+                            <span class="variation-badge variation-<%= variations[index] %>">
+                              <%= variations[index].titleize %>
+                            </span>
+                          <% end %>
+                        </h4>
+                        <div class="generated-recipe" style="height: auto !important; max-height: none !important; overflow: visible !important; font-size: 0.9em;">
+                          <% if recipe.present? && !recipe.start_with?("Sorry") %>
+                            <%= markdown(recipe) %>
+                          <% else %>
+                            <div class="error-message">
+                              <%= recipe %>
+                            </div>
+                          <% end %>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
       <% else %>
-        <!-- Display loading state -->
+        <!-- Loading state -->
         <div class="loading-placeholder">
           <div class="loading-spinner"></div>
-          <p>Generating your recipe...</p>
-          <p class="loading-hint">This may take up to 30 seconds...</p>
+          <p>Generating your 3 recipe variations...</p>
+          <p class="loading-hint">This may take up to 60 seconds...</p>
         </div>
       <% end %>
     </div>

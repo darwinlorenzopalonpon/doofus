@@ -19,6 +19,9 @@ gem "jbuilder"
 # Parse markdown to HTML for recipe display
 gem "redcarpet", "~> 3.6"
 
+# Concurrent processing for multiple recipe generation
+gem "concurrent-ruby", "~> 1.2"
+
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 gem "bcrypt", "~> 3.1.7"
 

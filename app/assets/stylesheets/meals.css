@@ -590,3 +590,145 @@ html {
   display: inline-block;
   animation: spin 1s linear infinite;
 }
+
+/* Recipe Comparison and Tabbed Interface Styles */
+.recipe-tabs {
+  border-bottom: 2px solid #e9ecef;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.recipe-tabs .nav-link {
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-weight: 500;
+  padding: 12px 20px;
+  color: #6c757d;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  background: none;
+  text-decoration: none;
+  display: block;
+}
+
+.recipe-tabs .nav-link.active {
+  border-bottom-color: #007bff;
+  color: #007bff;
+  background: none;
+}
+
+.recipe-tabs .nav-link:hover {
+  color: #007bff;
+  background: rgba(0, 123, 255, 0.1);
+}
+
+.tab-content .tab-pane {
+  display: none;
+}
+
+.tab-content .tab-pane.show {
+  display: block;
+}
+
+.recipe-comparison {
+  margin-top: 20px;
+}
+
+.variation-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  font-size: 0.75em;
+  border-radius: 12px;
+  font-weight: 500;
+  margin-left: 8px;
+}
+
+.variation-traditional {
+  background: #e8f5e8;
+  color: #2d5a2d;
+}
+
+.variation-quick {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.variation-creative {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.recipe-container {
+  max-width: none;
+}
+
+@media (min-width: 992px) {
+  .recipe-comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    align-items: start;
+  }
+
+  .recipe-comparison-item {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .recipe-comparison-item h4 {
+    flex-shrink: 0;
+    margin-bottom: 15px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+  }
+
+  .recipe-comparison-item .generated-recipe {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Ensure recipe sections align across columns */
+  .recipe-comparison-item .generated-recipe h1 {
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    margin-top: 0 !important;
+    margin-bottom: 20px !important;
+  }
+
+  .recipe-comparison-item .generated-recipe h2 {
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    margin-top: 25px !important;
+    margin-bottom: 15px !important;
+    border-top: 1px solid #e9ecef;
+    padding-top: 15px;
+  }
+
+  .recipe-comparison-item .generated-recipe p:first-of-type {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 991px) {
+  .recipe-comparison-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .recipe-comparison-item {
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 30px;
+  }
+
+  .recipe-comparison-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
