@@ -71,8 +71,8 @@ class RecipeGeneratorService
 
     # Fallback to single recipe
     {
-      recipes: [generate_recipe(params)],
-      variations: ["standard"],
+      recipes: [ generate_recipe(params) ],
+      variations: [ "standard" ],
       fallback: true
     }
   end
